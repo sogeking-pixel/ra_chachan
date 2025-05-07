@@ -4,45 +4,29 @@ using UnityEngine;
 
 public class ObjectManipulator : MonoBehaviour
 {
-    public GameObject ARObject0;
-    public GameObject ARObject1;
-    public GameObject ARObject2;
-    public GameObject ARObject = null;
+    private GameObject CurrentARObject = null;
 
     [SerializeField] private Camera arCamera;
 
-    [Header("Configuración")]
     private float rotateSpeed = 4.5f; // Reducida velocidad de rotación
     private float zoomSpeed = 0.05f; // Ajustada velocidad de zoom
-    //[SerializeField] private float zoomSmoothing = 1f; // Nuevo parámetro de suavizado
 
     private float touchStartDistance;
     private int previousTouchCount;
-    private Vector3 targetScale;
 
 
-    public void usarTigre()
+    public void usedObject(GameObject ArOject)
     {
-        this.ARObject = ARObject0;
+        CurrentARObject = ArOject;
 
     }
 
-    public void usarRoedor()
-    {
-        this.ARObject = ARObject1;
+    public void sinEnfoque(GameObject ArOject)
+    {   
+        if(CurrentARObject == ArOject) CurrentARObject = null;
 
     }
 
-    public void sinEnfoque()
-    {
-        this.ARObject = null;
-    }
-
-
-    void Start()
-    {
-        if (ARObject != null) targetScale = ARObject.transform.localScale;
-    }
 
     void Update()
     {
@@ -59,20 +43,11 @@ public class ObjectManipulator : MonoBehaviour
 
         previousTouchCount = touchCount;
 
-        //Suavizado del zoom
-        //if (ARObject != null && ARObject.transform.localScale != targetScale)
-        //{
-        //    ARObject.transform.localScale = Vector3.Lerp(
-        //        ARObject.transform.localScale,
-        //        targetScale,
-        //        zoomSmoothing * Time.deltaTime * 50
-        //    );
-        //}
     }
 
     private void HandleMultiTouch()
     {
-        if (ARObject == null) return;
+        if (CurrentARObject == null) return;
 
         Touch t1 = Input.GetTouch(0);
         Touch t2 = Input.GetTouch(1);
@@ -94,7 +69,7 @@ public class ObjectManipulator : MonoBehaviour
     {
         Touch touch = Input.GetTouch(0);
 
-        if (ARObject == null)
+        if (CurrentARObject == null)
         {
             if (touch.phase == TouchPhase.Ended) CheckObjectSelection(touch.position);
             return;
@@ -113,16 +88,16 @@ public class ObjectManipulator : MonoBehaviour
     private void ApplyRotation(float deltaX)
     {
         float rotationAmount = - deltaX * rotateSpeed * Time.deltaTime; // Más suave y con deltaTime
-        ARObject.transform.Rotate(Vector3.up, rotationAmount, Space.World);
+        CurrentARObject.transform.Rotate(Vector3.up, rotationAmount, Space.World);
     }
 
     private void ApplyZoom(float delta)
     {
         float zoomFactor = delta * zoomSpeed * Time.deltaTime;
-        Vector3 newScale = ARObject.transform.localScale + Vector3.one * zoomFactor;
-        newScale = Vector3.Max(newScale, Vector3.one * 0.01f);
+        Vector3 newScale = CurrentARObject.transform.localScale + Vector3.one * zoomFactor;
+        newScale = Vector3.Max(newScale, Vector3.one * 0.1f);
         newScale = Vector3.Min(newScale, Vector3.one * 3f);
-        ARObject.transform.localScale = newScale;
+        CurrentARObject.transform.localScale = newScale;
     }
 
     private void CheckObjectSelection(Vector2 screenPos)
@@ -130,8 +105,7 @@ public class ObjectManipulator : MonoBehaviour
         Ray ray = arCamera.ScreenPointToRay(screenPos);
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.CompareTag("ARObject"))
         {
-            ARObject = hit.transform.gameObject;
-            targetScale = ARObject.transform.localScale;
+            CurrentARObject = hit.transform.gameObject;
         }
     }
 }

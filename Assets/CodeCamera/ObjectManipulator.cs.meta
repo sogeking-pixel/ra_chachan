@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 175d890caaf75124f8c1e28175867cc5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ARObject0: {instanceID: 0}
+  - ARObject1: {instanceID: 0}
+  - ARObject2: {instanceID: 0}
+  - ARObject: {instanceID: 0}
+  - arCamera: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
