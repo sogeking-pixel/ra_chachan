@@ -20,12 +20,14 @@ public class ObjectManipulator : MonoBehaviour
     public void usedObject(GameObject ArOject)
     {
         CurrentARObject = ArOject;
+        Debug.Log($"usando objecto.{ArOject.name}");
 
     }
 
     public void sinEnfoque(GameObject ArOject)
     {   
         if(CurrentARObject == ArOject) CurrentARObject = null;
+        Debug.Log($"se intenta quitar el objecto.{ArOject.name}");
 
     }
 
@@ -89,12 +91,17 @@ public class ObjectManipulator : MonoBehaviour
 
     private void ApplyRotation(float deltaX)
     {
+        Debug.Log($"rotacion objecto :.{CurrentARObject.name}");
+
         float rotationAmount = - deltaX * rotateSpeed * Time.deltaTime; // Más suave y con deltaTime
         CurrentARObject.transform.Rotate(Vector3.up, rotationAmount, Space.World);
     }
 
     private void ApplyZoom(float delta)
     {
+        Debug.Log($"zoom objecto :.{CurrentARObject.name}");
+
+
         float zoomFactor = delta * zoomSpeed * Time.deltaTime;
         Vector3 newScale = CurrentARObject.transform.localScale + Vector3.one * zoomFactor;
         newScale = Vector3.Max(newScale, Vector3.one * 0.1f);
