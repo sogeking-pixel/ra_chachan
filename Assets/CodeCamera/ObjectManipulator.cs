@@ -8,6 +8,8 @@ public class ObjectManipulator : MonoBehaviour
 
     [SerializeField] private Camera arCamera;
 
+    // prueba de rama
+
     private float rotateSpeed = 4.5f; // Reducida velocidad de rotación
     private float zoomSpeed = 0.05f; // Ajustada velocidad de zoom
 
