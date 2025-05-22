@@ -67,13 +67,13 @@ Este proyecto fue creado por:
     <td align="center">
       <a href="https://github.com/CodigoB">
         <img src="https://avatars.githubusercontent.com/u/183947084?v=4" width="100px;" alt="Jorge Briceno"/><br />
-        <sub><b>Jorge Briceno</b></sub>
+        <p><b>Jorge Briceno</b></p>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/sogeking-pixel">
         <img src="https://avatars.githubusercontent.com/u/52290162?v=4" width="100px;" alt="Yerson Sanchez"/><br />
-        <sub><b>Yerson Sanchez</b></sub>
+        <p><b>Yerson Sanchez</b></p>
       </a>
     </td>
   </tr>
