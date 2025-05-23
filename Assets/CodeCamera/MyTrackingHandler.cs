@@ -8,6 +8,7 @@ public class CustomObserverEventHandler : DefaultObserverEventHandler
     protected override void OnTrackingFound()
     {
         base.OnTrackingFound();
+        
         if (breathingEffect != null)
             breathingEffect.OnTargetFound();
     }
