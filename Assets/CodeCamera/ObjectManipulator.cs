@@ -24,7 +24,7 @@ public class ObjectManipulator : MonoBehaviour
 
     }
 
-    public void sinEnfoque(GameObject ArOject)
+    public void notUsedObject(GameObject ArOject)
     {   
         if(CurrentARObject == ArOject) CurrentARObject = null;
         Debug.Log($"se intenta quitar el objecto.{ArOject.name}");
